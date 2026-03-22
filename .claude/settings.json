@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(*python* -m pytest*)",
+      "Bash(*python* ticket.py*)",
+      "Bash(*python* message.py*)",
+      "Bash(python -c \":*)",
+      "Bash(python tools/ticket.py list)",
+      "Bash(git rm:*)"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "git status": true,
+        "git log": true,
+        "git diff": true,
+        "git branch": true,
+        "git show": true,
+        "git fetch": true,
+        "git checkout": true,
+        "git pull": true,
+        "source .venv/Scripts/activate": true,
+        "python ticket.py list": true,
+        "python ticket.py view": true,
+        "python ticket.py search": true,
+        "python ticket.py sprint": true,
+        "python handoff.py list": true,
+        "python handoff.py latest": true,
+        "python message.py list": true,
+        "python message.py view": true,
+        "python -m pytest tools/tests/": true,
+        "black --check": true,
+        "ruff check": true,
+        "isort --check-only": true
+    }
+}
