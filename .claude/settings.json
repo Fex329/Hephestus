@@ -7,7 +7,25 @@
       "Bash(*python* message.py*)",
       "Bash(python -c \":*)",
       "Bash(python tools/ticket.py list)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(pytest)",
+      "Bash(python dashboard.py --help)",
+      "Bash(python -c \"import dashboard; print\\(''''dashboard imports OK''''\\)\")",
+      "Bash(python -c \"import dashboard; print\\(''dashboard imports OK''\\)\")",
+      "Bash(python handoff.py --handoff-dir ../../backoffice/handoff/ --help)",
+      "Bash(python merge_check.py --ticket ISS-129)",
+      "Bash(python handoff.py write --help)",
+      "Bash(python merge_check.py --ticket ISS-140)",
+      "Bash(ls c:/temp/ClaudeProjects/hephestus/.github/agents/*.agent.md)",
+      "Bash(ls c:/temp/ClaudeProjects/hephestus/.claude/commands/*.md)",
+      "Bash(ls c:/temp/ClaudeProjects/hephestus/memory/*.md)",
+      "Bash(ls c:/temp/ClaudeProjects/hephestus/*.code-workspace)",
+      "Bash(cat c:/temp/ClaudeProjects/hephestus/*.code-workspace)",
+      "Bash(sed 's/\\\\.agent\\\\.md//')",
+      "Bash(sed 's/\\\\.md//')",
+      "Bash(python -c \"import dashboard; print\\(''OK''\\)\")",
+      "Bash(python merge_check.py --ticket ISS-138)",
+      "Bash(python -c \"import json; f=open\\(''c:/temp/ClaudeProjects/hephestus/hephestus.code-workspace''\\); d=json.load\\(f\\); print\\(''valid JSON''\\); print\\(f''{len\\(d[\"\"folders\"\"]\\)} folders:''\\); [print\\(f''  {x[\"\"name\"\"]} -> {x[\"\"path\"\"]}''\\) for x in d[''folders'']]\")"
     ]
   }
 }
