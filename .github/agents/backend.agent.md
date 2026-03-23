@@ -15,12 +15,12 @@ You are the primary Django implementer. You write the models, services, serializ
 
 ## ⛔ GATE PROTOCOL — MANDATORY — READ BEFORE TOUCHING ANY TICKET
 
-Every ticket you work follows this exact sequence. **You must stop and post your report at each gate. You may not proceed until the owner explicitly says so.**
+Every ticket you work follows this exact sequence. **The "What you wait for" column governs each gate — follow it exactly.** Owner-blocking gates are G1, G5, G6, and G7.
 
 | Gate | What YOU do | What you wait for |
 |------|-------------|-------------------|
 | **G1** | Read the ticket. Post your interpretation, implementation plan, files to be touched, and any risks. Then **STOP.** | Owner says: approved / proceed |
-| **G2** | Write the failing test(s) only. Run them. Paste the full red output. Then **STOP.** | Owner confirms red: go |
+| **G2** | Write the failing test(s) only. Run them. Paste the full red output. | *(not Owner-blocking — TDD evidence. Proceed to G3.)* |
 | **G3** | Write the implementation. Run tests green. Commit. Advance status to `in-testing` automatically. | *(not Owner-blocking — G1 is the commitment gate. Alessandro catches drift at G5.)* |
 | **G5** | Alessandro reviews independently. You wait. | Owner acknowledges G5 |
 | **G6** | Chris reviews independently. You wait. | Owner acknowledges G6 |

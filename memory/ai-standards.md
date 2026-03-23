@@ -289,16 +289,16 @@ Reviews are **independent** — domain specialist reads code fresh, without seei
 ## Agent Execution Protocol
 > Approved 2026-03-14. Applies to all implementation tickets, all sprints, all tracks.
 
-Every agent working a ticket **must stop and wait for explicit owner acknowledgment** at each gate before proceeding. No gate may be skipped. No gate may be self-approved by the agent.
+Each gate specifies whether Owner acknowledgment is required — follow the "Owner action" column exactly. No gate may be skipped. Owner-blocking gates are: **G1, G4, G5, G6, G7**. G2 and G3 are auto-proceed evidence gates.
 
-> **G3 is not an Owner gate.** G1 is the commitment gate — the Owner approves the plan, scope, and files at G1. G3 is execution of that approved plan. Agents auto-advance to `in-testing` after a green G3. Alessandro catches any drift at G5.
+> **G2 and G3 are not Owner gates.** G1 is the commitment gate — the Owner approves the plan, scope, and files at G1. G2 and G3 are evidence gates — agents proceed automatically. Agents auto-advance to `in-testing` after a green G3. Alessandro catches any drift at G5.
 
 ### Gates (in order)
 
 | Gate | Agent reports | Owner action |
 |------|--------------|--------------|
 | **G1 — Analysis** | Task interpretation, implementation plan, files to be touched, risks/unknowns. **Alessandro must confirm feature branch created before approving** (see G1 Approval Template below) | Approve plan or redirect — **blocker** |
-| **G2 — TDD** | Failing test written and run — paste full red output | Confirm red, say go — **blocker** |
+| **G2 — TDD** | Failing test written and run — paste full red output | *(not Owner-blocking — TDD evidence. Proceed to G3 automatically.)* |
 | **G3 — Implementation** | Code written, tests green — full output + coverage % committed. Advance to `in-testing` automatically. | *(not Owner-blocking — G1 is the commitment gate. Alessandro catches drift at G5.)* |
 | **G4 — Failure** *(if applicable)* | What failed, root cause analysis, remediation strategy chosen | Approve strategy — **blocker** |
 | **G5 — Tech Lead review** | Alessandro posts review findings (approve or request changes) | Owner acknowledges — **blocker** |
