@@ -291,13 +291,15 @@ Reviews are **independent** — domain specialist reads code fresh, without seei
 
 Every agent working a ticket **must stop and wait for explicit owner acknowledgment** at each gate before proceeding. No gate may be skipped. No gate may be self-approved by the agent.
 
+> **G3 is not an Owner gate.** G1 is the commitment gate — the Owner approves the plan, scope, and files at G1. G3 is execution of that approved plan. Agents auto-advance to `in-testing` after a green G3. Alessandro catches any drift at G5.
+
 ### Gates (in order)
 
 | Gate | Agent reports | Owner action |
 |------|--------------|--------------|
 | **G1 — Analysis** | Task interpretation, implementation plan, files to be touched, risks/unknowns. **Alessandro must confirm feature branch created before approving** (see G1 Approval Template below) | Approve plan or redirect — **blocker** |
 | **G2 — TDD** | Failing test written and run — paste full red output | Confirm red, say go — **blocker** |
-| **G3 — Implementation** | Code written, tests run green — paste full green output + coverage % | Confirm green — **blocker** |
+| **G3 — Implementation** | Code written, tests green — full output + coverage % committed. Advance to `in-testing` automatically. | *(not Owner-blocking — G1 is the commitment gate. Alessandro catches drift at G5.)* |
 | **G4 — Failure** *(if applicable)* | What failed, root cause analysis, remediation strategy chosen | Approve strategy — **blocker** |
 | **G5 — Tech Lead review** | Alessandro posts review findings (approve or request changes) | Owner acknowledges — **blocker** |
 | **G6 — Domain review** | Domain specialist posts independent review findings, runs full test suite on branch, then merges feature branch to `main` via `--no-ff`. Merge only if G5 and G6 both approved in the same review cycle. | Owner acknowledges — **blocker** |

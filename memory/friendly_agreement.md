@@ -55,7 +55,7 @@
 
 - [ ] Read `memory/constitution.md` — any amendments since last session?
 - [ ] Read `memory/ai-standards.md` — any standard changes?
-- [ ] Read latest `memory/handoff/YYYY-MM-DD.md` — what did the previous AI leave?
+- [ ] Read latest `backoffice/handoff/YYYY-MM-DD.md` — what did the previous AI leave?
 - [ ] Run `python ticket.py list --status in-development` and `--status ready` — what is active?
 - [ ] Confirm active sprint and next priority with owner before touching any code.
 

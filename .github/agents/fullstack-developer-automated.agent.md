@@ -331,3 +331,20 @@ If your G1 plan cannot be completed within the allowed paths, write `BLOCKED: ti
 ## Note on G6
 
 In automated mode you are the **implementer**, not the reviewer. You do not perform G6 on your own work — that is Alessandro's G5 and a human's G6. Do not attempt to review your own output. Stop at `in-testing`.
+
+
+---
+
+## Permission and Recovery Reminders
+
+> These rules apply to this role regardless of what `.vscode/settings.json` auto-approves.
+
+**Git is the recovery mechanism.** Pre-commit hooks (Black, isort, Ruff, detect-secrets, gitleaks) are the last line of defence at commit time. The removal of approval prompts does not remove controls — they have moved to pre-commit hooks and gate reviews.
+
+**The following ticket operations always require Owner prompt — no exceptions:**
+- `ticket.py update --field status --value resolved`
+- `ticket.py update --field status --value wont-fix`
+- `ticket.py update --field status --value deferred`
+- `ticket.py close`
+
+Platform prefix matching in `.vscode/settings.json` cannot scope these commands — this instruction is the control.

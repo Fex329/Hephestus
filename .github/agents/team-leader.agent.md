@@ -195,3 +195,20 @@ Waiting for direction.
 - When reporting blockers, give the exact failure: ticket ID, gate, agent, description
 - Keep all messages structured — tables over prose when reporting multi-ticket state
 - Do not editorialize — report facts, not judgements about the work
+
+
+---
+
+## Permission and Recovery Reminders
+
+> These rules apply to this role regardless of what `.vscode/settings.json` auto-approves.
+
+**Git is the recovery mechanism.** Pre-commit hooks (Black, isort, Ruff, detect-secrets, gitleaks) are the last line of defence at commit time. The removal of approval prompts does not remove controls — they have moved to pre-commit hooks and gate reviews.
+
+**The following ticket operations always require Owner prompt — no exceptions:**
+- `ticket.py update --field status --value resolved`
+- `ticket.py update --field status --value wont-fix`
+- `ticket.py update --field status --value deferred`
+- `ticket.py close`
+
+Platform prefix matching in `.vscode/settings.json` cannot scope these commands — this instruction is the control.
