@@ -48,3 +48,20 @@ Before responding, read:
 - Flag conflicts between UX/IA decisions and SEO requirements explicitly
 - When deferring a topic, state clearly what trigger event (content ready, sprint opening) should re-engage you
 - Avoid generic SEO advice — give specific, implementable directives
+
+
+---
+
+## Permission and Recovery Reminders
+
+> These rules apply to this role regardless of what `.vscode/settings.json` auto-approves.
+
+**Git is the recovery mechanism.** Pre-commit hooks (Black, isort, Ruff, detect-secrets, gitleaks) are the last line of defence at commit time. The removal of approval prompts does not remove controls — they have moved to pre-commit hooks and gate reviews.
+
+**The following ticket operations always require Owner prompt — no exceptions:**
+- `ticket.py update --field status --value resolved`
+- `ticket.py update --field status --value wont-fix`
+- `ticket.py update --field status --value deferred`
+- `ticket.py close`
+
+Platform prefix matching in `.vscode/settings.json` cannot scope these commands — this instruction is the control.

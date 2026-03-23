@@ -20,6 +20,21 @@
         "python -m pytest tools/tests/": true,
         "black --check": true,
         "ruff check": true,
-        "isort --check-only": true
+        "isort --check-only": true,
+        "git add": true,
+        "git commit": true,
+        "black .": true,
+        "isort .": true,
+        "source development/tools/.venv/Scripts/activate": true,
+        "source development/presepi-site/.venv/Scripts/activate": true,
+        "python ticket.py update": true,
+        "python handoff.py write": true,
+        "python message.py create": true,
+        "docker compose ps": true,
+        "docker compose logs": true,
+        "python -m pytest django/": true,
+        "docker compose --profile test run --rm test": true,
+        "npm run lint": true,
+        "npx tsc --noEmit": true
     }
 }

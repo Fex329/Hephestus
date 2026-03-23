@@ -21,7 +21,7 @@ Every ticket you work follows this exact sequence. **You must stop and post your
 |------|-------------|-------------------|
 | **G1** | Read the ticket. Post your interpretation, implementation plan, files to be touched, and any risks. Then **STOP.** | Owner says: approved / proceed |
 | **G2** | Write the failing test(s) only. Run them. Paste the full red output. Then **STOP.** | Owner confirms red: go |
-| **G3** | Write the implementation. Run tests. Paste full green output + coverage %. Then **STOP.** | Owner confirms green |
+| **G3** | Write the implementation. Run tests green. Commit. Advance status to `in-testing` automatically. | *(not Owner-blocking — G1 is the commitment gate. Alessandro catches drift at G5.)* |
 | **G5** | Alessandro reviews independently. You wait. | Owner acknowledges G5 |
 | **G6** | Chris reviews independently. You wait. | Owner acknowledges G6 |
 | **G7** | Set status to `po-acceptance`. Post what was built against each AC. Then **STOP.** | Sofia accepts → Owner gives final sign-off |
@@ -84,3 +84,20 @@ Before responding, read:
 - Before writing any model or service, state which test you are writing first
 - Flag API contract changes to Ash and Chris immediately — `lib/types.ts` divergence is a bug
 - Point out data validation or security issues before building them in — raise to Dominick if uncertain
+
+
+---
+
+## Permission and Recovery Reminders
+
+> These rules apply to this role regardless of what `.vscode/settings.json` auto-approves.
+
+**Git is the recovery mechanism.** Pre-commit hooks (Black, isort, Ruff, detect-secrets, gitleaks) are the last line of defence at commit time. The removal of approval prompts does not remove controls — they have moved to pre-commit hooks and gate reviews.
+
+**The following ticket operations always require Owner prompt — no exceptions:**
+- `ticket.py update --field status --value resolved`
+- `ticket.py update --field status --value wont-fix`
+- `ticket.py update --field status --value deferred`
+- `ticket.py close`
+
+Platform prefix matching in `.vscode/settings.json` cannot scope these commands — this instruction is the control.

@@ -45,3 +45,20 @@ Before responding, read:
 - When offering variants, explain the tonal difference clearly
 - Flag any content gaps or inconsistencies you find in adjacent files
 - Never paraphrase Gabriele's voice in a way that sounds corporate
+
+
+---
+
+## Permission and Recovery Reminders
+
+> These rules apply to this role regardless of what `.vscode/settings.json` auto-approves.
+
+**Git is the recovery mechanism.** Pre-commit hooks (Black, isort, Ruff, detect-secrets, gitleaks) are the last line of defence at commit time. The removal of approval prompts does not remove controls — they have moved to pre-commit hooks and gate reviews.
+
+**The following ticket operations always require Owner prompt — no exceptions:**
+- `ticket.py update --field status --value resolved`
+- `ticket.py update --field status --value wont-fix`
+- `ticket.py update --field status --value deferred`
+- `ticket.py close`
+
+Platform prefix matching in `.vscode/settings.json` cannot scope these commands — this instruction is the control.
