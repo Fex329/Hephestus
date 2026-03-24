@@ -519,6 +519,27 @@ All CLI tools that append notes to tickets or messages must accept a `--caller` 
 
 ---
 
+## Process Rules
+
+### DevOps / Infra Sprints — Smoke-Test Command Required
+> Retro action reorg-1. Applies to all infrastructure and devops sprints.
+
+When a sprint contains no automated test suite (infrastructure, devops, or tooling work that produces no runnable tests), a **smoke-test command** must be defined at sprint planning as the accepted done signal.
+
+The smoke-test command must be:
+- Defined before any ticket in the sprint moves to `in-development`
+- Recorded in the sprint planning session file
+- Run and passed before the sprint is marked closed
+
+Examples:
+- Docker-based: `docker compose --profile test run --rm test`
+- Service health check: `curl -f http://localhost/health`
+- Custom validation script agreed at planning
+
+If no smoke-test command can be defined, the sprint must have an explicit Owner-approved manual acceptance checklist instead. A sprint with no test signal and no checklist may not be closed.
+
+---
+
 ## Commit Message Format
 **Conventional Commits** — `<type>(<scope>): <imperative description>`
 
