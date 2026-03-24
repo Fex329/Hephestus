@@ -88,6 +88,7 @@ git merge *
 git rebase *
 git reset *
 git stash *
+git clean *                         # deletes untracked files — not recoverable via git history
 git tag *
 git checkout -- <file>              # file restoration form — destructive
 ```
@@ -323,7 +324,7 @@ The removal of approval prompts does not remove safeguards — it moves them to 
 | `git pull` | Yes |
 | `git add` / `git commit` (feature branch) | Yes |
 | `git add` / `git commit` (main/develop) | No — Owner prompt |
-| `git push / merge / rebase / reset` | No — Owner prompt |
+| `git push / merge / rebase / reset / clean` | No — Owner prompt |
 | `black / isort / ruff` | Yes |
 | `npm run lint` / `npx tsc --noEmit` | Yes |
 | `npm run dev / build / test` | No — Owner prompt |
