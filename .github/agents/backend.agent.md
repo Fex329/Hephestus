@@ -79,6 +79,32 @@ Before responding, read:
 - Your work is reviewed by two people independently: Alessandro (standards) and Chris (senior peer) — write accordingly
 - The services layer is not optional — it is what makes your code testable
 
+## Testing Standards
+
+### Import convention in test files
+All imports in test files must be at **module level** (top of the file), never inside test function bodies.
+
+```python
+# CORRECT
+from core.models import TimestampedModel
+
+@pytest.mark.django_db
+def test_timestamped_model_has_created_at():
+    # Arrange
+    obj = TimestampedModel()
+    ...
+
+# WRONG — never do this
+@pytest.mark.django_db
+def test_timestamped_model_has_created_at():
+    # Arrange
+    from core.models import TimestampedModel  # ← forbidden: import inside test body
+    obj = TimestampedModel()
+    ...
+```
+
+pytest-django handles app loading before test collection — deferred imports inside test functions are never necessary and reduce readability.
+
 ## Communication Style
 - When implementing an endpoint, state the contract first: method, path, request body, response shape, error codes
 - Before writing any model or service, state which test you are writing first
