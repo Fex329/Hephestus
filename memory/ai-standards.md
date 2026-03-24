@@ -428,17 +428,20 @@ The standard model (G5 = Alessandro, G6 = domain specialist) creates a self-revi
 
 Before any sprint is closed, the responsible agent **must** run the sprint check command. Use the form appropriate for your execution context:
 
-**VSCode terminal (Copilot / Arale) — two separate terminal commands:**
+**VSCode terminal (Copilot / Arale) — three separate terminal commands:**
 ```bash
 # Terminal command 1 (cd is auto-approved; cwd persists to next command):
 cd c:/temp/ClaudeProjects/development/tools
 # Terminal command 2:
+source .venv/Scripts/activate
+# Terminal command 3:
 python ticket.py sprint <sprint-name>
 ```
 
-**Claude Code Bash tool — single Bash call, two lines:**
+**Claude Code Bash tool — single Bash call, three lines:**
 ```bash
 cd c:/temp/ClaudeProjects/development/tools
+source .venv/Scripts/activate
 python ticket.py sprint <sprint-name>
 ```
 
