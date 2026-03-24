@@ -298,6 +298,7 @@ Applies to all auto-approved commands: `ticket.py`, `handoff.py`, `message.py`, 
 - Fixtures: pytest fixtures in `conftest.py` — no Django XML fixtures
 - DB tests: `@pytest.mark.django_db`
 - Test files: in `tests/` subfolder of each app
+- Imports: all imports at module level — never inside test function bodies. pytest-django handles app loading before test collection; deferred imports are never necessary and reduce readability. (ISS-156)
 
 ### Next.js
 - Test files: co-located with component (`ProductCard.test.tsx`)
