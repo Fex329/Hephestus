@@ -221,7 +221,7 @@ Both Backend and Frontend agents are responsible for keeping them in sync.
 When a ticket asks to fix a pattern — stale paths, wrong imports, broken references, renamed symbols, or any other systemic inconsistency — the implementer **must** search for all instances of the pattern before marking the ticket done. A fix applied to one location while the same problem exists elsewhere is an incomplete fix.
 
 Required steps:
-1. Run a project-wide search (e.g. `grep -r`, `rg`, or the Grep tool) for the affected pattern before starting.
+1. Run a project-wide search using the **Grep tool** (preferred), or `grep -r` / `rg` in the terminal, for the affected pattern before starting.
 2. Fix every instance found — not just the one that triggered the ticket.
 3. Record the search command and the number of instances found in the ticket notes.
 
