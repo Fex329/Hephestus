@@ -258,25 +258,34 @@ cd c:/temp/ClaudeProjects/development/tools && python ticket.py list
 cd c:/temp/ClaudeProjects/hephestus && git status
 ```
 
-**Permitted alternative 1 — activate venv first, then use the short form (preferred):**
+**Permitted alternative 1 — short form (auto-approved, but requires correct cwd):**
 ```bash
 # GOOD — command starts with "python", prefix matches, auto-approved
-# Works because venv activation puts python on PATH and agents run from the tools directory
+# PRECONDITION: cwd must already be development/tools — this is NOT guaranteed for all agents.
+# Automated agents receive their working directory from Arale; it may not be development/tools.
+# Use this form only when you know cwd is already development/tools.
 python ticket.py list
 
 # GOOD — git resolves the repo root automatically by traversing parent directories
-# No path flag needed; standard git status works from any subdirectory within the repo
+# No path flag needed; standard git status works from any subdirectory within the repo.
+# No cwd precondition applies — git handles repo root lookup internally.
 git status
 ```
 
-**Permitted alternative 2 — run `cd` as a separate Bash call, then run the command in a subsequent call:**
+**Permitted alternative 2 — absolute path form (reliable regardless of cwd, but NOT auto-approved):**
 ```bash
-# Step 1 (separate Bash call)
-cd c:/temp/ClaudeProjects/development/tools
-
-# Step 2 (separate Bash call — now starts with "python", auto-approved)
-python ticket.py list
+# GOOD — works from any cwd because the script path is absolute
+# NOT auto-approved: the string does not match any settings.json prefix key
+# Use this form when cwd is unknown or not development/tools
+python c:/temp/ClaudeProjects/development/tools/ticket.py list
 ```
+
+> **Important — cwd does not persist between Bash tool calls in Claude Code.**
+> Each Bash tool invocation starts with the session's default cwd. A `cd` in one Bash call
+> has no effect on any subsequent Bash call. There is no "separate cd step then command step"
+> pattern that works in Claude Code — the cd is lost before the second call runs.
+> The only reliable cross-call approach is either: (a) ensure cwd is correct at the start of
+> every Bash call that needs it, or (b) use absolute paths.
 
 **Applies to all auto-approved commands without exception:** `ticket.py`, `handoff.py`, `message.py`, `git`, `pytest`, and any other command covered by an auto-approve rule. There are no exemptions.
 
@@ -410,9 +419,8 @@ The standard model (G5 = Alessandro, G6 = domain specialist) creates a self-revi
 Before any sprint is closed, the responsible agent **must** run:
 
 ```bash
-# Alternative 2 — separate cd step (first Bash call), then command (second Bash call)
-cd development/tools
-python ticket.py sprint <sprint-name>
+# Use absolute path — cwd is not guaranteed when invoking this check
+python c:/temp/ClaudeProjects/development/tools/ticket.py sprint <sprint-name>
 ```
 
 Confirm that zero tickets remain in an open status (`open`, `in-development`, `in-testing`, `in-refinement`, `po-acceptance`). If any open tickets are found, they must be resolved, deferred, or explicitly carried forward to the next sprint before the sprint is marked closed. Do not close a sprint with silently lingering tickets.
