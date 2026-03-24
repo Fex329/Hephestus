@@ -247,7 +247,7 @@ python --version   # must show 3.14.3
 
 ### cd && chaining — prohibited
 
-**Never chain a `cd` with `&&` to run an auto-approved command.** The VSCode `settings.json` auto-approve rules use plain string prefix match against the full command string. A command that starts with `cd` never matches those prefixes — the Owner approval prompt fires unexpectedly and breaks automation.
+**Never write `cd /path && command` as a single shell string.** In both Claude Code Bash tool calls and VSCode terminal sessions, this pattern breaks auto-approval because the auto-approve rules match on command string prefix — a string starting with `cd` never matches `^python ticket.py` or `^git`.
 
 **Prohibited pattern — do not do this:**
 ```bash
@@ -258,36 +258,46 @@ cd c:/temp/ClaudeProjects/development/tools && python ticket.py list
 cd c:/temp/ClaudeProjects/hephestus && git status
 ```
 
-**Permitted alternative 1 — short form (auto-approved, but requires correct cwd):**
+#### Claude Code Bash tool
+
+cwd does **not** persist between separate Bash tool calls. Each invocation resets to the session default cwd — a `cd` in one Bash call has no effect on any subsequent call. Use a **single Bash call with two lines** — no `&&`:
+
 ```bash
-# GOOD — command starts with "python", prefix matches, auto-approved
-# PRECONDITION: cwd must already be development/tools — this is NOT guaranteed for all agents.
-# Automated agents receive their working directory from Arale; it may not be development/tools.
-# Use this form only when you know cwd is already development/tools.
+# BAD — two separate Bash calls; the cd in call 1 is lost before call 2 runs
+# Call 1:
+cd c:/temp/ClaudeProjects/development/tools
+# Call 2 (cwd already reset — cd above had no effect):
 python ticket.py list
-
-# GOOD — git resolves the repo root automatically by traversing parent directories
-# No path flag needed; standard git status works from any subdirectory within the repo.
-# No cwd precondition applies — git handles repo root lookup internally.
-git status
 ```
 
-**Permitted alternative 2 — absolute path form (reliable regardless of cwd, but NOT auto-approved):**
 ```bash
-# GOOD — works from any cwd because the script path is absolute
-# NOT auto-approved: the string does not match any settings.json prefix key
-# Use this form when cwd is unknown or not development/tools
-python c:/temp/ClaudeProjects/development/tools/ticket.py list
+# GOOD — single Bash call, two lines; one shell process, cd on line 1 affects line 2
+cd c:/temp/ClaudeProjects/development/tools
+python ticket.py list
 ```
 
-> **Important — cwd does not persist between Bash tool calls in Claude Code.**
-> Each Bash tool invocation starts with the session's default cwd. A `cd` in one Bash call
-> has no effect on any subsequent Bash call. There is no "separate cd step then command step"
-> pattern that works in Claude Code — the cd is lost before the second call runs.
-> The only reliable cross-call approach is either: (a) ensure cwd is correct at the start of
-> every Bash call that needs it, or (b) use absolute paths.
+This is **one Bash tool invocation** with two lines in its body — not two separate calls.
 
-**Applies to all auto-approved commands without exception:** `ticket.py`, `handoff.py`, `message.py`, `git`, `pytest`, and any other command covered by an auto-approve rule. There are no exemptions.
+#### VSCode terminal (Copilot / Arale)
+
+cwd **does** persist between separate terminal commands in the same session. Run the `cd` as a first terminal command; run the actual command as a second terminal command — two separate calls, cwd carries over:
+
+```bash
+# BAD — single chained string; starts with "cd", never matches auto-approve prefix
+cd c:/temp/ClaudeProjects/development/tools && python ticket.py list
+```
+
+```bash
+# GOOD — two separate terminal commands; cwd persists between them
+# Terminal command 1:
+cd c:/temp/ClaudeProjects/development/tools
+# Terminal command 2:
+python ticket.py list
+```
+
+The `cd` navigation commands for workspace roots are auto-approved in `settings.json` — Copilot/Arale can run the `cd` step without prompting.
+
+Applies to all auto-approved commands: `ticket.py`, `handoff.py`, `message.py`, `git`, `pytest`, and any other command on the auto-approve allowlist.
 
 ---
 
@@ -416,11 +426,20 @@ The standard model (G5 = Alessandro, G6 = domain specialist) creates a self-revi
 ### Sprint Close — Zero Open Ticket Check
 > Retro action reorg-1. Mandatory for all roles, every sprint.
 
-Before any sprint is closed, the responsible agent **must** run:
+Before any sprint is closed, the responsible agent **must** run the sprint check command. Use the form appropriate for your execution context:
 
+**VSCode terminal (Copilot / Arale) — two separate terminal commands:**
 ```bash
-# Use absolute path — cwd is not guaranteed when invoking this check
-python c:/temp/ClaudeProjects/development/tools/ticket.py sprint <sprint-name>
+# Terminal command 1 (cd is auto-approved; cwd persists to next command):
+cd c:/temp/ClaudeProjects/development/tools
+# Terminal command 2:
+python ticket.py sprint <sprint-name>
+```
+
+**Claude Code Bash tool — single Bash call, two lines:**
+```bash
+cd c:/temp/ClaudeProjects/development/tools
+python ticket.py sprint <sprint-name>
 ```
 
 Confirm that zero tickets remain in an open status (`open`, `in-development`, `in-testing`, `in-refinement`, `po-acceptance`). If any open tickets are found, they must be resolved, deferred, or explicitly carried forward to the next sprint before the sprint is marked closed. Do not close a sprint with silently lingering tickets.

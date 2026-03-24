@@ -35,6 +35,11 @@
         "python -m pytest django/": true,
         "docker compose --profile test run --rm test": true,
         "npm run lint": true,
-        "npx tsc --noEmit": true
+        "npx tsc --noEmit": true,
+        "cd c:/temp/ClaudeProjects/development/tools": true,
+        "cd c:/temp/ClaudeProjects/hephestus": true,
+        "cd c:/temp/ClaudeProjects/development/presepi-site": true,
+        "cd c:/temp/ClaudeProjects/backoffice": true,
+        "cd c:/temp/ClaudeProjects/docs": true
     }
 }
