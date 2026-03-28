@@ -100,13 +100,13 @@ AI agents **must not**:
 ```
 c:\temp\ClaudeProjects\
 ├── repos\                    ← legacy bare repos (archived — no longer origin for any repo)
-├── hephestus\                ← governance repo → github.com/Fex329/Hephestus  (origin)
+├── hephestus\                ← governance repo → github.com/Ame-no-Mahitotsu/Hephestus  (origin)
 ├── development\
-│   ├── tools\                ← PM tooling repo  → github.com/Fex329/Tools      (origin)
-│   ├── presepi-site\         ← site code        → github.com/Fex329/SitoPresepe (origin)
+│   ├── tools\                ← PM tooling repo  → github.com/Ame-no-Mahitotsu/Tools      (origin)
+│   ├── presepi-site\         ← site code        → github.com/Ame-no-Mahitotsu/SitoPresepe (origin)
 │   └── worktrees\            ← ephemeral agent worktrees (gitignored)
-├── docs\                     ← documentation    → github.com/Fex329/Docs        (origin)
-├── backoffice\               ← operational files → github.com/Fex329/Backoffice (origin)
+├── docs\                     ← documentation    → github.com/Ame-no-Mahitotsu/Docs        (origin)
+├── backoffice\               ← operational files → github.com/Ame-no-Mahitotsu/Backoffice (origin)
 └── SitoPresepi2\             ← legacy monorepo (archived after ISS-141)
 ```
 

@@ -15,7 +15,8 @@
       "Bash(python c:/temp/ClaudeProjects/development/tools/ticket.py update ISS-162 --field status --value resolved --caller Dominick --note \"2026-03-24 Dominick: [GATE 6 APPROVED] All security checks passed. Five cd entries verified: all within c:/temp/ClaudeProjects/ workspace boundary, navigation-only with no capability escalation, subsequent commands require independent auto-approve match. No out-of-workspace traversal vector. Consistent with agent_permissions.md v2 threat model \\(trusted single-operator environment\\) and recovery model. Rule correctly distinguishes Claude Code Bash tool \\(two-line single call, cwd non-persistent\\) vs VSCode terminal \\(separate commands, cwd persistent\\) — no false security claims, no escalation path. Sprint Close section accurate in both contexts. All four commits cite ISS-162 and use chore\\(process\\): format \\(Rules 2 and 4\\). No residue from prior defective drafts. No defects found.\")",
       "Bash(xargs grep:*)",
       "Bash(python c:/temp/ClaudeProjects/development/tools/ticket.py view ISS-103)",
-      "Bash(git worktree:*)"
+      "Bash(git worktree:*)",
+      "Bash(git remote:*)"
     ]
   }
 }
