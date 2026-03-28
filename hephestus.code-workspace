@@ -4,7 +4,8 @@
     { "path": "../docs", "name": "docs" },
     { "path": "../backoffice", "name": "backoffice" },
     { "path": "../development/tools", "name": "tools (pm)" },
-    { "path": "../development/presepi-site", "name": "presepi-site" }
+    { "path": "../development/presepi-site", "name": "presepi-site" },
+    { "path": "../Office", "name": "office (agent desks)" }
   ],
   "settings": {}
 }
