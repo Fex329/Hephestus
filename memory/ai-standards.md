@@ -103,14 +103,33 @@ c:\temp\ClaudeProjects\
 ├── hephestus\                ← governance repo → github.com/Ame-no-Mahitotsu/Hephestus  (origin)
 ├── development\
 │   ├── tools\                ← PM tooling repo  → github.com/Ame-no-Mahitotsu/Tools      (origin)
-│   ├── presepi-site\         ← site code        → github.com/Ame-no-Mahitotsu/SitoPresepe (origin)
+│   ├── presepi-site\         ← Owner integration reference → github.com/Ame-no-Mahitotsu/SitoPresepe (origin)
 │   └── worktrees\            ← ephemeral agent worktrees (gitignored)
 ├── docs\                     ← documentation    → github.com/Ame-no-Mahitotsu/Docs        (origin)
 ├── backoffice\               ← operational files → github.com/Ame-no-Mahitotsu/Backoffice (origin)
+├── Office\                   ← agent desks (ISS-176) — see Agent Desk Model below
+│   ├── Alessandro-Desk\      hephestus, tools, presepi-site, docs, backoffice
+│   ├── Patrick-Desk\         hephestus, tools, presepi-site, docs, backoffice
+│   ├── Chris-Desk\           hephestus, tools, presepi-site, docs, backoffice
+│   ├── Dominick-Desk\        hephestus, tools, presepi-site, docs, backoffice
+│   ├── Rich-Desk\            hephestus, tools, presepi-site, docs, backoffice
+│   ├── Lauren-Desk\          hephestus, tools, presepi-site, docs, backoffice
+│   ├── Sofia-Desk\           hephestus, tools, presepi-site, docs, backoffice
+│   ├── Bea-Desk\             hephestus, tools, presepi-site, docs, backoffice
+│   ├── Claire-Desk\          tools, presepi-site
+│   ├── Ash-Desk\             presepi-site
+│   ├── Salvatore-Desk\       hephestus, presepi-site
+│   ├── Helios-Desk\          docs, presepi-site
+│   ├── Sarah-Desk\           docs, presepi-site
+│   ├── Martina-Desk\         docs, presepi-site
+│   ├── Rob-Desk\             backoffice, tools
+│   └── Fran-Desk\            backoffice, tools
 └── SitoPresepi2\             ← legacy monorepo (archived after ISS-141)
 ```
 
 All 5 repos use `origin` pointing to GitHub (SSH). The `repos\` bare repo folder is retained on disk but is no longer the origin for any active repo.
+
+Each desk contains full git clones of scoped repos. Each desk has a `{AgentName}-Desk.code-workspace` file. The `Office\` folder is not itself a git repo.
 
 ### Branch model — development/presepi-site (site code)
 ```
