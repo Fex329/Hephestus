@@ -103,8 +103,7 @@ c:\temp\ClaudeProjects\
 ├── hephestus\                ← governance repo → github.com/Ame-no-Mahitotsu/Hephestus  (origin)
 ├── development\
 │   ├── tools\                ← PM tooling repo  → github.com/Ame-no-Mahitotsu/Tools      (origin)
-│   ├── presepi-site\         ← Owner integration reference → github.com/Ame-no-Mahitotsu/SitoPresepe (origin)
-│   └── worktrees\            ← ephemeral agent worktrees (gitignored)
+│   └── presepi-site\         ← Owner integration reference → github.com/Ame-no-Mahitotsu/SitoPresepe (origin)
 ├── docs\                     ← documentation    → github.com/Ame-no-Mahitotsu/Docs        (origin)
 ├── backoffice\               ← operational files → github.com/Ame-no-Mahitotsu/Backoffice (origin)
 ├── Office\                   ← agent desks (ISS-176) — see Agent Desk Model below
@@ -130,6 +129,17 @@ c:\temp\ClaudeProjects\
 All 5 repos use `origin` pointing to GitHub (SSH). The `repos\` bare repo folder is retained on disk but is no longer the origin for any active repo.
 
 Each desk contains full git clones of scoped repos. Each desk has a `{AgentName}-Desk.code-workspace` file. The `Office\` folder is not itself a git repo.
+
+#### Desk repo scope
+
+| Desk | Repos |
+|---|---|
+| Alessandro, Patrick, Chris, Dominick, Rich, Lauren, Sofia, Bea | hephestus, tools, presepi-site, docs, backoffice |
+| Claire | tools, presepi-site |
+| Ash | presepi-site |
+| Salvatore | hephestus, presepi-site |
+| Helios, Sarah, Martina | docs, presepi-site |
+| Rob, Fran | backoffice, tools |
 
 ### Agent Desk Model
 > Established ISS-176/ISS-177, 2026-03-28.
@@ -411,13 +421,14 @@ Each gate specifies whether Owner acknowledgment is required — follow the "Own
 | **G1 — Analysis** | Task interpretation, implementation plan, files to be touched, risks/unknowns. **Alessandro must confirm feature branch created before approving** (see G1 Approval Template below) | Approve plan or redirect — **blocker** |
 | **G2 — TDD** | Failing test written and run — paste full red output | *(not Owner-blocking — TDD evidence. Proceed to G3 automatically.)* |
 | **G3 — Implementation** | Code written, tests green — full output + coverage % committed. Advance to `in-testing` automatically. | *(not Owner-blocking — G1 is the commitment gate. Alessandro catches drift at G5.)* |
+| **Pre-G5 — Sofia checklist** | Sofia verifies: branch name matches convention, base branch correct, all changes committed, G2 and G3 gate notes present in ticket. Posts `[PRE-G5 APPROVED]` or `[PRE-G5 BLOCKED]`. See `po.agent.md § Pre-G5 Checklist` for pass/fail note templates. | Sofia sign-off required before G5 — **blocker** |
 | **G4 — Failure** *(if applicable)* | What failed, root cause analysis, remediation strategy chosen | Approve strategy — **blocker** |
 | **G5 — Tech Lead review** | Alessandro posts review findings (approve or request changes) | Owner acknowledges — **blocker** |
 | **G6 — Domain review** | Domain specialist posts independent review findings, runs full test suite on branch, then merges feature branch to `main` via `--no-ff`. Merge only if G5 and G6 both approved in the same review cycle. | Owner acknowledges — **blocker** |
 | **G7 — PO acceptance** | Agent sets status to `po-acceptance`, posts what was built against each acceptance criterion | **Step 1:** Sofia (PO) reviews and posts acceptance against each criterion. **Step 2:** Owner gives final sign-off → `resolved`. Both steps required — **blocker** |
 
 ### Status transitions
-`ready` → *(G1 approved)* → `in-development` → *(G2+G3 approved)* → `in-testing` → *(G5+G6 approved)* → `po-acceptance` → *(G7 signed off)* → `resolved`
+`ready` → *(G1 approved)* → `in-development` → *(G2+G3)* → `in-testing` → *(Pre-G5 + G5 + G6 approved)* → `po-acceptance` → *(G7 signed off)* → `resolved`
 
 ### Escalation gate
 At **any point**, if an agent is blocked, uncertain, or encounters unexpected complexity, it **must stop immediately** and escalate — to the owner directly, or by requesting another agent role be invoked for questions or brainstorming. Guessing or proceeding without clarity is not permitted.
