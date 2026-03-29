@@ -79,7 +79,7 @@ AI agents **must not**:
 | Layer | Technology | Notes |
 |---|---|---|
 | API | Django 5.2.x (>=5.2.8) + Django REST Framework 3.x | Python 3.14.3 |
-| Frontend | Next.js 14.x (App Router) | TypeScript strict mode |
+| Frontend | Next.js 16.x (App Router) | TypeScript strict mode |
 | Admin | Custom Django app | Isolated from public API |
 | Database | PostgreSQL 16.x | |
 | Reverse proxy | Nginx (latest stable) | |
