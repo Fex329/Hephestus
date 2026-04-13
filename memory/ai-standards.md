@@ -79,7 +79,7 @@ AI agents **must not**:
 | Layer | Technology | Notes |
 |---|---|---|
 | API | Django 5.2.x (>=5.2.8) + Django REST Framework 3.x | Python 3.14.3 |
-| Frontend | Next.js 14.x (App Router) | TypeScript strict mode |
+| Frontend | Next.js 16.x (App Router) | TypeScript strict mode |
 | Admin | Custom Django app | Isolated from public API |
 | Database | PostgreSQL 16.x | |
 | Reverse proxy | Nginx (latest stable) | |
@@ -103,14 +103,99 @@ c:\temp\ClaudeProjects\
 ├── hephestus\                ← governance repo → github.com/Ame-no-Mahitotsu/Hephestus  (origin)
 ├── development\
 │   ├── tools\                ← PM tooling repo  → github.com/Ame-no-Mahitotsu/Tools      (origin)
-│   ├── presepi-site\         ← site code        → github.com/Ame-no-Mahitotsu/SitoPresepe (origin)
-│   └── worktrees\            ← ephemeral agent worktrees (gitignored)
+│   └── presepi-site\         ← Owner integration reference → github.com/Ame-no-Mahitotsu/SitoPresepe (origin)
 ├── docs\                     ← documentation    → github.com/Ame-no-Mahitotsu/Docs        (origin)
 ├── backoffice\               ← operational files → github.com/Ame-no-Mahitotsu/Backoffice (origin)
+├── Office\                   ← agent desks (ISS-176) — see Agent Desk Model below
+│   ├── Alessandro-Desk\      hephestus, tools, presepi-site, docs, backoffice
+│   ├── Patrick-Desk\         hephestus, tools, presepi-site, docs, backoffice
+│   ├── Chris-Desk\           hephestus, tools, presepi-site, docs, backoffice
+│   ├── Dominick-Desk\        hephestus, tools, presepi-site, docs, backoffice
+│   ├── Rich-Desk\            hephestus, tools, presepi-site, docs, backoffice
+│   ├── Lauren-Desk\          hephestus, tools, presepi-site, docs, backoffice
+│   ├── Sofia-Desk\           hephestus, tools, presepi-site, docs, backoffice
+│   ├── Bea-Desk\             hephestus, tools, presepi-site, docs, backoffice
+│   ├── Claire-Desk\          tools, presepi-site
+│   ├── Ash-Desk\             presepi-site
+│   ├── Salvatore-Desk\       hephestus, presepi-site
+│   ├── Helios-Desk\          docs, presepi-site
+│   ├── Sarah-Desk\           docs, presepi-site
+│   ├── Martina-Desk\         docs, presepi-site
+│   ├── Rob-Desk\             backoffice, tools
+│   └── Fran-Desk\            backoffice, tools
 └── SitoPresepi2\             ← legacy monorepo (archived after ISS-141)
 ```
 
 All 5 repos use `origin` pointing to GitHub (SSH). The `repos\` bare repo folder is retained on disk but is no longer the origin for any active repo.
+
+Each desk contains full git clones of scoped repos. Each desk has a `{AgentName}-Desk.code-workspace` file. The `Office\` folder is not itself a git repo.
+
+#### Desk repo scope
+
+| Desk | Repos |
+|---|---|
+| Alessandro, Patrick, Chris, Dominick, Rich, Lauren, Sofia, Bea | hephestus, tools, presepi-site, docs, backoffice |
+| Claire | tools, presepi-site |
+| Ash | presepi-site |
+| Salvatore | hephestus, presepi-site |
+| Helios, Sarah, Martina | docs, presepi-site |
+| Rob, Fran | backoffice, tools |
+
+### Agent Desk Model
+> Established ISS-176/ISS-177, 2026-03-28.
+
+#### Starting a ticket from your desk
+1. Open your desk workspace: `Office/{AgentName}-Desk/{AgentName}-Desk.code-workspace`
+2. In the relevant repo clone, pull the base branch:
+   ```
+   git checkout main && git pull origin main        # hephestus, tools, docs, backoffice
+   git checkout develop && git pull origin develop  # presepi-site
+   ```
+3. Create the feature branch:
+   ```
+   git checkout -b feature/iss-NNN-short-description
+   ```
+4. Work the ticket gate-by-gate (G1 → G2 → G3).
+5. Commit all changes and push:
+   ```
+   git push -u origin feature/iss-NNN-short-description
+   ```
+6. Post the branch name in your G3 note — Bea/Owner creates the PR. Owner merges after G5 + G6 are both acknowledged.
+
+#### Root repo policy — pull-only (ISS-182, 2026-03-28)
+
+The root repo clones at `c:\temp\ClaudeProjects\` are **pull-only**:
+
+| Root path | Repo |
+|---|---|
+| `c:\temp\ClaudeProjects\hephestus\` | Hephestus |
+| `c:\temp\ClaudeProjects\backoffice\` | Backoffice |
+| `c:\temp\ClaudeProjects\docs\` | Docs |
+| `c:\temp\ClaudeProjects\development\tools\` | Tools |
+| `c:\temp\ClaudeProjects\development\presepi-site\` | SitoPresepe |
+
+**Rules — no exceptions:**
+- **Never create a branch in a root repo.** Feature branches belong in your desk clone only.
+- **Never stage or commit in a root repo.** All development work happens in `Office/{AgentName}-Desk/`.
+- **One permitted write at root:** `git pull origin main` (or `develop` for presepi-site) at session start to stay current with released work.
+
+If you find yourself in a root repo with uncommitted changes, on a feature branch, or with a dirty working tree — you are in the wrong repo. Stop, open your desk workspace, and continue there.
+
+#### Canonical tool paths (all agents, all desks)
+```
+python c:/temp/ClaudeProjects/development/tools/ticket.py <subcommand>
+python c:/temp/ClaudeProjects/development/tools/message.py <subcommand>
+```
+All agents use this fixed absolute path regardless of desk. Some desks (e.g. Ash-Desk) do not contain a `tools` clone — use the canonical path above, not a relative path from your desk.
+
+#### Chained tickets (same files, sequential)
+Branch ticket N from ticket N-1's feature branch — not from `main` or `develop`:
+```
+feature/iss-067-...              ← ticket 1: branched from main
+  └── feature/iss-071-...        ← ticket 2: branched from iss-067 (not from main)
+       └── feature/iss-072-...   ← ticket 3: branched from iss-071
+```
+State the base branch explicitly in your G1 note.
 
 ### Branch model — development/presepi-site (site code)
 ```
@@ -355,13 +440,14 @@ Each gate specifies whether Owner acknowledgment is required — follow the "Own
 | **G1 — Analysis** | Task interpretation, implementation plan, files to be touched, risks/unknowns. **Alessandro must confirm feature branch created before approving** (see G1 Approval Template below) | Approve plan or redirect — **blocker** |
 | **G2 — TDD** | Failing test written and run — paste full red output | *(not Owner-blocking — TDD evidence. Proceed to G3 automatically.)* |
 | **G3 — Implementation** | Code written, tests green — full output + coverage % committed. Advance to `in-testing` automatically. | *(not Owner-blocking — G1 is the commitment gate. Alessandro catches drift at G5.)* |
+| **Pre-G5 — Sofia checklist** | Sofia verifies: branch name matches convention, base branch correct, all changes committed, G2 and G3 gate notes present in ticket. Posts `[PRE-G5 APPROVED]` or `[PRE-G5 BLOCKED]`. See `po.agent.md § Pre-G5 Checklist` for pass/fail note templates. | Sofia sign-off required before G5 — **blocker** |
 | **G4 — Failure** *(if applicable)* | What failed, root cause analysis, remediation strategy chosen | Approve strategy — **blocker** |
 | **G5 — Tech Lead review** | Alessandro posts review findings (approve or request changes) | Owner acknowledges — **blocker** |
 | **G6 — Domain review** | Domain specialist posts independent review findings, runs full test suite on branch, then merges feature branch to `main` via `--no-ff`. Merge only if G5 and G6 both approved in the same review cycle. | Owner acknowledges — **blocker** |
 | **G7 — PO acceptance** | Agent sets status to `po-acceptance`, posts what was built against each acceptance criterion | **Step 1:** Sofia (PO) reviews and posts acceptance against each criterion. **Step 2:** Owner gives final sign-off → `resolved`. Both steps required — **blocker** |
 
 ### Status transitions
-`ready` → *(G1 approved)* → `in-development` → *(G2+G3 approved)* → `in-testing` → *(G5+G6 approved)* → `po-acceptance` → *(G7 signed off)* → `resolved`
+`ready` → *(G1 approved)* → `in-development` → *(G2+G3)* → `in-testing` → *(Pre-G5 + G5 + G6 approved)* → `po-acceptance` → *(G7 signed off)* → `resolved`
 
 ### Escalation gate
 At **any point**, if an agent is blocked, uncertain, or encounters unexpected complexity, it **must stop immediately** and escalate — to the owner directly, or by requesting another agent role be invoked for questions or brainstorming. Guessing or proceeding without clarity is not permitted.
@@ -431,6 +517,8 @@ python ticket.py view ISS-XXX  # copy the notes field
 python ticket.py update ISS-XXX --field notes \
   --value "<existing notes> | YYYY-MM-DD <role>: [GATE N] <new entry>"
 ```
+
+**No gate-output files.** Gate content goes directly into ticket notes — the `[GATE N]` format is the complete record. Do not create files in `backoffice/gate-output/`. The directory exists as a historical archive; nothing new is written there. If a gate review is too long to summarise in a ticket note, the review is over-engineered — tighten it. (ISS-189, approved 2026-03-30)
 
 ---
 

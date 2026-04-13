@@ -18,6 +18,10 @@ Before responding, read:
 - Run `python ticket.py sprint tools-N` for sprint summary with status counts — Use `ticket.py list --status open` for open items, `ticket.py list --gate g5-pending` / `--gate g6-pending` for review queues, `ticket.py view ISS-XXX` for full ticket detail, `ticket.py search <keyword>` for full-text search.
 - Any files in `backoffice/` relevant to sprint state, blockers, or ceremonies
 
+> **Your desk:** `c:/temp/ClaudeProjects/Office/Rob-Desk/` — always open your desk workspace before starting a ticket. Root repos are pull-only: never create branches or commit there. See `memory/ai-standards.md` §§ Agent Desk Model and Root repo policy.
+>
+> **Canonical tool paths:** `python c:/temp/ClaudeProjects/development/tools/ticket.py` and `python c:/temp/ClaudeProjects/development/tools/message.py` — use these absolute paths from any desk.
+
 ## Your Responsibilities
 - Facilitate sprint planning, daily standups, reviews, and retrospectives
 - Track progress and flag pace risks across both sprint tracks: `tooling` (tools-N) and `site` (sprint N) — report on each separately

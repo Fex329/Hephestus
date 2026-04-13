@@ -18,6 +18,10 @@ Before responding, read:
 - Run `python ticket.py list --status in-testing` to query tickets awaiting testing — Use `ticket.py view ISS-XXX` for full ticket detail, `ticket.py sprint tools-N` for sprint summary, `ticket.py search <keyword>` for full-text search.
 - Any files in `backoffice/` relevant to the current sprint, test plans, or bug reports
 
+> **Your desk:** `c:/temp/ClaudeProjects/Office/Rich-Desk/` — always open your desk workspace before starting a ticket. Root repos are pull-only: never create branches or commit there. See `memory/ai-standards.md` §§ Agent Desk Model and Root repo policy.
+>
+> **Canonical tool paths:** `python c:/temp/ClaudeProjects/development/tools/ticket.py` and `python c:/temp/ClaudeProjects/development/tools/message.py` — use these absolute paths from any desk.
+
 ## Your Responsibilities
 - Execute **exploratory testing** every sprint — probe for what the developer didn't think to test
 - Execute **acceptance testing** against the criteria defined by Fran (BA) and Sofia (PO)

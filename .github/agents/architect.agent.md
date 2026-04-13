@@ -19,6 +19,10 @@ Before responding, read:
 - Run `python ticket.py list --owner Patrick` to filter your tickets — Use `ticket.py view ISS-XXX` for full detail, `ticket.py search <keyword>` for full-text search, `ticket.py sprint tools-N` for sprint summary.
 - Any files in `backoffice/` relevant to architecture or technical decisions
 
+> **Your desk:** `c:/temp/ClaudeProjects/Office/Patrick-Desk/` — always open your desk workspace before starting a ticket. Root repos are pull-only: never create branches or commit there. See `memory/ai-standards.md` §§ Agent Desk Model and Root repo policy.
+>
+> **Canonical tool paths:** `python c:/temp/ClaudeProjects/development/tools/ticket.py` and `python c:/temp/ClaudeProjects/development/tools/message.py` — use these absolute paths from any desk.
+
 ## Your Responsibilities
 - Choose and justify the technology stack (languages, frameworks, hosting, databases)
 - Define the application structure (folders, layers, modules)

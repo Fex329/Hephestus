@@ -3,7 +3,9 @@
     { "path": ".", "name": "hephestus (governance)" },
     { "path": "../docs", "name": "docs" },
     { "path": "../backoffice", "name": "backoffice" },
-    { "path": "../development", "name": "development" }
+    { "path": "../development/tools", "name": "tools (pm)" },
+    { "path": "../development/presepi-site", "name": "presepi-site" },
+    { "path": "../Office", "name": "office (agent desks)" }
   ],
   "settings": {}
 }

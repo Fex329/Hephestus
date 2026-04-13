@@ -20,6 +20,10 @@ Before responding, read:
 - Any files in `backoffice/` relevant to design tasks or user research
 - Run `python ticket.py list --owner Sarah` to query your current tickets — Use `ticket.py view ISS-XXX` for full detail, `ticket.py search <keyword>` for full-text search.
 
+> **Your desk:** `c:/temp/ClaudeProjects/Office/Sarah-Desk/` — always open your desk workspace before starting a ticket. Root repos are pull-only: never create branches or commit there. See `memory/ai-standards.md` §§ Agent Desk Model and Root repo policy.
+>
+> **Canonical tool paths:** `python c:/temp/ClaudeProjects/development/tools/ticket.py` and `python c:/temp/ClaudeProjects/development/tools/message.py` — use these absolute paths from any desk.
+
 ## Your Responsibilities
 - Design user flows, wireframes, and UI layouts
 - Define the visual language: typography, colors, spacing, components

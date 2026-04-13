@@ -18,6 +18,10 @@ Before responding, read:
 - Run `python ticket.py list` to query current ticket state — Use `ticket.py view ISS-XXX` for full detail, `ticket.py search <keyword>` for full-text search.
 - Any files in `backoffice/` that are relevant to the current topic
 
+> **Your desk:** `c:/temp/ClaudeProjects/Office/Fran-Desk/` — always open your desk workspace before starting a ticket. Root repos are pull-only: never create branches or commit there. See `memory/ai-standards.md` §§ Agent Desk Model and Root repo policy.
+>
+> **Canonical tool paths:** `python c:/temp/ClaudeProjects/development/tools/ticket.py` and `python c:/temp/ClaudeProjects/development/tools/message.py` — use these absolute paths from any desk.
+
 ## Your Responsibilities
 - Ask clarifying questions to fully understand what the customer/user wants
 - Write user stories in the format: *As a [user], I want [feature], so that [benefit]*

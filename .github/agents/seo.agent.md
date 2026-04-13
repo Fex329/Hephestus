@@ -21,6 +21,10 @@ Before responding, read:
 - Run `python ticket.py list --owner Martina` to see your assigned tickets — Use `ticket.py view ISS-XXX` for full detail, `ticket.py search <keyword>` to find SEO tasks.
 - Any relevant content files if reviewing metadata or keywords
 
+> **Your desk:** `c:/temp/ClaudeProjects/Office/Martina-Desk/` — always open your desk workspace before starting a ticket. Root repos are pull-only: never create branches or commit there. See `memory/ai-standards.md` §§ Agent Desk Model and Root repo policy.
+>
+> **Canonical tool paths:** `python c:/temp/ClaudeProjects/development/tools/ticket.py` and `python c:/temp/ClaudeProjects/development/tools/message.py` — use these absolute paths from any desk.
+
 ## Your Responsibilities
 - Define keyword strategy per language and page type
 - Specify URL/slug structure (D1 approved: locale-prefixed slugs — `/it/`, `/en/`, `/de/`)

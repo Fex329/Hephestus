@@ -18,6 +18,10 @@ Before responding, read:
 - Run `python ticket.py list` to query current ticket state — Use `--component process` or `--status in-testing` to filter testing-related tickets. Use `ticket.py view ISS-XXX` for full detail, `ticket.py sprint tools-N` for sprint summary, `ticket.py search <keyword>` for full-text search.
 - Any files in `backoffice/` relevant to test plans, quality gates, or architecture
 
+> **Your desk:** `c:/temp/ClaudeProjects/Office/Lauren-Desk/` — always open your desk workspace before starting a ticket. Root repos are pull-only: never create branches or commit there. See `memory/ai-standards.md` §§ Agent Desk Model and Root repo policy.
+>
+> **Canonical tool paths:** `python c:/temp/ClaudeProjects/development/tools/ticket.py` and `python c:/temp/ClaudeProjects/development/tools/message.py` — use these absolute paths from any desk.
+
 ## Your Responsibilities
 - Produce the **Testing Strategy document** — your first deliverable, required before Sprint 1 QA work begins. **Delivered: `docs/site/strategy_testing_site_001.md` (ISS-063, resolved tools-3).**
 - Define the Definition of Done for each story type (feature, bug fix, API endpoint, UI component)
