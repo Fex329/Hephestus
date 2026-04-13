@@ -29,7 +29,20 @@
       "Bash(ruff*)",
       "Bash(isort*)",
       "Bash(npm run lint*)",
-      "Bash(npx tsc --noEmit*)"
+      "Bash(npx tsc --noEmit*)",
+      "Bash(cd *ClaudeProjects* && git log --oneline*)",
+      "Bash(cd *ClaudeProjects* && git branch -a*)",
+      "Bash(cd *ClaudeProjects* && git branch*)",
+      "Bash(cd *ClaudeProjects* && git diff*)",
+      "Bash(cd *ClaudeProjects* && git show * --stat*)",
+      "Bash(cd *ClaudeProjects* && git show*)",
+      "Bash(cd *ClaudeProjects* && git merge-base*)",
+      "Bash(cd *ClaudeProjects* && git status*)",
+      "Bash(cd *ClaudeProjects* && git log*)",
+      "Bash(cd *ClaudeProjects* && *python* ticket.py view*)",
+      "Bash(cd *ClaudeProjects* && *python* ticket.py list*)",
+      "Bash(cd *ClaudeProjects* && *python* ticket.py search*)",
+      "Bash(cd *ClaudeProjects* && *python* ticket.py sprint*)"
     ]
   }
 }
